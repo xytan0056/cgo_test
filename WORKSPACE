@@ -132,6 +132,16 @@ go_repository(
     version = "v0.1.12",
 )
 
+http_archive(
+    name = "libpam",
+    sha256 = "eff47a4ecd833fbf18de9686632a70ee8d0794b79aecb217ebd0ce11db4cd0db",
+    strip_prefix = "Linux-PAM-1.3.1/libpam",
+    urls = [
+        "http://deb.debian.org/debian/pool/main/p/pam/pam_1.3.1.orig.tar.xz",
+    ],
+    build_file = "//third_party/C/libpam:BUILD.system",
+)
+
 go_rules_dependencies()
 
 go_register_toolchains(version = "1.21.3")

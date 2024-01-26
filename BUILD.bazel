@@ -11,7 +11,7 @@ go_library(
         "add.h",
         "main.go",
     ],
-    cdeps = [":add"],
+    cdeps = [":add", "@libpam//:lib"],
     cgo = True,
     importpath = "github.com/example/project",
     visibility = ["//visibility:private"],

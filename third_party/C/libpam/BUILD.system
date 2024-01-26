@@ -1,0 +1,65 @@
+filegroup(
+    name = "srcs",
+    srcs = glob([
+        "*.c",
+        "*.h",
+    ]),
+)
+
+filegroup(
+    name = "incl",
+    srcs = glob(["include/**/*.h"]),
+)
+
+cc_binary(
+    name = "libpam.so",
+    srcs = [
+        ":incl",
+        ":srcs",
+        "@//third_party/C/libpam:config",
+    ],
+    copts = [
+        "-fPIC",
+        "-Iexternal/libpam/include",
+        "-Ithird_party/C/libpam",
+    ],
+    defines = [
+        'DEFAULT_MODULE_PATH=\\"/lib/security\\"',
+        "LIBPAM_COMPILE",
+    ],
+    linkopts = ["-Wl,-soname,libpam.so.0"],
+    linkshared = True,
+)
+
+cc_library(
+    name = "libpam.a",
+    srcs = [
+        ":incl",
+        ":srcs",
+        "@//third_party/C/libpam:config",
+    ],
+    copts = [
+        "-Iexternal/libpam/include",
+        "-Ithird_party/C/libpam",
+    ],
+    defines = [
+        'DEFAULT_MODULE_PATH=\\"/lib/security\\"',
+        "LIBPAM_COMPILE",
+    ],
+    linkopts = ["-ldl"],
+    linkstatic = True,
+    visibility = ["//visibility:public"],
+)
+
+cc_import(
+    name = "libpam",
+    shared_library = ":libpam.so",
+)
+
+cc_library(
+    name = "lib",
+    hdrs = [":incl"],
+    strip_include_prefix = "include",
+    visibility = ["//visibility:public"],
+    deps = [":libpam"],
+)
