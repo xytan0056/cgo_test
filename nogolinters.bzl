@@ -36,7 +36,9 @@ DEFAULT_LINTERS = [
 ]
 
 # NilAway is separated since we need to run default linters without it as a reference to continuously monitor the performance overhead of NilAway.
-NILAWAY = []
+NILAWAY = [
+
+]
 
 def nogo_linters():
     string_flag(
@@ -73,7 +75,7 @@ def nogo_linters():
     )
 
     nogo(
-        name = "default_nogo",
+        name = "my_nogo",
         config = select({
             ":nogo_disabled": None,
             "//conditions:default": ":nogo.json",

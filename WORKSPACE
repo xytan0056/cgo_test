@@ -125,20 +125,20 @@ go_repository(
     version = "v0.0.0-20220722155257-8c9f86f7a55f",
 )
 
-go_repository(
-    name = "org_golang_x_tools",
-    sum = "h1:VveCTK38A2rkS8ZqFY25HIDFscX5X9OoEhJd3quQmXU=",
-    version = "v0.1.12",
-    build_extra_args = [
-        "-go_naming_convention_external=go_default_library",
-        # exclude dirs with intentionally-invalid go code
-        "-exclude=**/testdata",
-    ],
-    build_file_generation = "on",
-    build_file_proto_mode = "disable",
-    importpath = "golang.org/x/tools",
-    replace = "golang.org/x/tools",
-)
+# go_repository(
+#     name = "org_golang_x_tools",
+#     sum = "h1:VveCTK38A2rkS8ZqFY25HIDFscX5X9OoEhJd3quQmXU=",
+#     version = "v0.1.12",
+#     build_extra_args = [
+#         "-go_naming_convention_external=go_default_library",
+#         # exclude dirs with intentionally-invalid go code
+#         "-exclude=**/testdata",
+#     ],
+#     build_file_generation = "on",
+#     build_file_proto_mode = "disable",
+#     importpath = "golang.org/x/tools",
+#     replace = "golang.org/x/tools",
+# )
 
 http_archive(
     name = "libpam",
@@ -152,8 +152,6 @@ http_archive(
 
 go_rules_dependencies()
 
-go_register_toolchains(version = "1.21.3")
+go_register_toolchains(version = "1.21.3", nogo = "@//:my_nogo")
 
 gazelle_dependencies()
-
-

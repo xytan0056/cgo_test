@@ -1,8 +1,15 @@
 load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library", "go_test")
 load("@bazel_gazelle//:def.bzl", "gazelle")
-load(":nogolinters.bzl", "nogo_linters")
 
-nogo_linters()
+load("@io_bazel_rules_go//go:def.bzl", "nogo")
+
+nogo(
+    name = "my_nogo",
+    deps = [
+        "@org_golang_x_tools//go/analysis/passes/asmdecl:go_default_library",
+    ],
+    visibility = ["//visibility:public"], # must have public visibility
+)
 
 # gazelle:prefix github.com/example/project
 gazelle(name = "gazelle")
