@@ -4,8 +4,6 @@ import (
 	"fmt"
 	"time"
 
-	git "github.com/go-git/go-git/v5"
-	"github.com/go-git/go-git/v5/plumbing"
 	"gopkg.in/yaml.v3"
 )
 
@@ -47,42 +45,6 @@ func Filter(t *test, opts ...FilterOption) *test {
 	return n
 }
 
-func IsAncestor(r, commit, reference string) (bool, error) {
-	if len(commit) == 0 || len(reference) == 0 {
-		return false, fmt.Errorf("empty commit or reference")
-	}
-	repo, err := git.PlainOpenWithOptions(r, &git.PlainOpenOptions{DetectDotGit: true})
-	if err != nil {
-		return false, err
-	}
-
-	commitHash, err := repo.ResolveRevision(plumbing.Revision(commit))
-	if err != nil {
-		return false, fmt.Errorf("cannot resolve commit: %s : %w", commit, err)
-	}
-
-	commitObj, err := repo.CommitObject(*commitHash)
-	if err != nil {
-		return false, fmt.Errorf("cannot retrieve commit: %w", err)
-	}
-
-	refHash, err := repo.ResolveRevision(plumbing.Revision(reference))
-	if err != nil {
-		return false, fmt.Errorf("cannot resolve reference: %s : %w", reference, err)
-	}
-
-	referenceObj, err := repo.CommitObject(*refHash)
-	if err != nil {
-		return false, fmt.Errorf("cannot retrieve reference: %w", err)
-	}
-
-	isAncestor, err := commitObj.IsAncestor(referenceObj)
-	if err != nil {
-		return false, fmt.Errorf("cannot check ancestor: %w", err)
-	}
-
-	return isAncestor, nil
-}
 
 func running() error {
 	fmt.Println("running")

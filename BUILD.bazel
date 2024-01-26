@@ -15,11 +15,7 @@ go_library(
     cgo = True,
     importpath = "github.com/example/project",
     visibility = ["//visibility:private"],
-    deps = [
-        "@com_github_go_git_go_git_v5//:go-git",
-        "@com_github_go_git_go_git_v5//plumbing",
-        "@in_gopkg_yaml_v3//:yaml_v3",
-    ],
+    deps = ["@in_gopkg_yaml_v3//:yaml_v3"],
 )
 
 cc_library(
