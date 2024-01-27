@@ -28,12 +28,13 @@ func main() {
 	// Call the C function from Go
 	result := C.add(3, 7)
 	fmt.Printf("Result from C: %d\n", result)
-
+	
+	fmt.Println(f( nil))
 
 }
 
 
-func writeLoginuid(pamh *C.pam_handle_t) error {
+func f(pamh *C.pam_handle_t) error {
 	envName := C.CString("SSH_AUTH_INFO_0")
 	pamEnv := C.pam_getenv(pamh, envName)
 	C.free(unsafe.Pointer(envName))
