@@ -1,5 +1,5 @@
 load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library", "go_test")
-load("@bazel_gazelle//:def.bzl", "gazelle")
+load("@bazel_gazelle//:def.bzl", "gazelle_binary")
 
 load("@io_bazel_rules_go//go:def.bzl", "nogo")
 
@@ -11,8 +11,17 @@ nogo(
     visibility = ["//visibility:public"], # must have public visibility
 )
 
-# gazelle:prefix github.com/example/project
-gazelle(name = "gazelle")
+gazelle_binary(
+    name = "gazelle_bin",
+    # Gazelle runs the extensions below in order. Behavior may change if the order is changed.
+    languages = [
+        "@bazel_gazelle//language/bazel/visibility:go_default_library",
+        "@bazel_gazelle//language/proto:go_default_library",
+        "@bazel_gazelle//language/go:go_default_library",
+        "@com_github_bazelbuild_rules_python_gazelle//python",
+    ],
+    visibility = ["//visibility:public"],
+)
 
 go_library(
     name = "project_lib",

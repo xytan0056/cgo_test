@@ -150,6 +150,44 @@ http_archive(
     build_file = "//third_party/C/libpam:BUILD.system",
 )
 
+go_repository(
+    name = "com_github_bazelbuild_rules_python_gazelle",
+    build_extra_args = ["-go_naming_convention_external=go_default_library"],
+    build_file_generation = "off",
+    build_file_proto_mode = "disable",
+    importpath = "github.com/bazelbuild/rules_python/gazelle",
+    sum = "h1:ZhYrFOC3ffjTNS8bZ8v1zRIeKv0k1SzlMBaW5TbPE/M=",
+    version = "v0.0.0-20231221070459-2cbdc1b57bb7",
+)
+
+go_repository(
+    name = "com_github_emirpasic_gods",
+    build_extra_args = ["-go_naming_convention_external=go_default_library"],
+    build_file_generation = "on",
+    build_file_proto_mode = "disable",
+    importpath = "github.com/emirpasic/gods",
+    sum = "h1:FXtiHYKDGKCW2KzwZKx0iC0PQmdlorYgdFG9jPXJ1Bc=",
+    version = "v1.18.1",
+)
+
+go_repository(
+    name = "com_github_bmatcuk_doublestar",
+    build_extra_args = ["-go_naming_convention_external=go_default_library"],
+    build_file_generation = "on",
+    build_file_proto_mode = "disable",
+    importpath = "github.com/bmatcuk/doublestar",
+    sum = "h1:gPypJ5xD31uhX6Tf54sDPUOBXTqKH4c9aPY66CyQrS0=",
+    version = "v1.3.4",
+)
+go_repository(
+    name = "in_gopkg_yaml_v2",
+    build_extra_args = ["-go_naming_convention_external=go_default_library"],
+    build_file_generation = "on",
+    build_file_proto_mode = "disable",
+    importpath = "gopkg.in/yaml.v2",
+    sum = "h1:D8xgwECY7CYvx+Y2n4sBz93Jn9JRvxdiyyo8CTfuKaY=",
+    version = "v2.4.0",
+)
 go_rules_dependencies()
 
 go_register_toolchains(version = "1.21.3", nogo = "@//:my_nogo")
