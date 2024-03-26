@@ -156,8 +156,8 @@ go_repository(
     build_file_generation = "off",
     build_file_proto_mode = "disable",
     importpath = "github.com/bazelbuild/rules_python/gazelle",
-    sum = "h1:ZhYrFOC3ffjTNS8bZ8v1zRIeKv0k1SzlMBaW5TbPE/M=",
-    version = "v0.0.0-20231221070459-2cbdc1b57bb7",
+    sum = "h1:oy3hW0129HW4B6fpAFKPEiWkxEuoEglts1AppMDEKCo=",
+    version = "v0.0.0-20240321125912-c5c03b2477dd",
 )
 
 go_repository(

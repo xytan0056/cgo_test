@@ -18,6 +18,7 @@ gazelle_binary(
         "@bazel_gazelle//language/bazel/visibility:go_default_library",
         "@bazel_gazelle//language/proto:go_default_library",
         "@bazel_gazelle//language/go:go_default_library",
+        # break
         "@com_github_bazelbuild_rules_python_gazelle//python",
     ],
     visibility = ["//visibility:public"],
